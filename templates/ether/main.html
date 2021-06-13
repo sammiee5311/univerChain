@@ -1,0 +1,16 @@
+{% extends 'base.html' %} 
+
+{% block title %} | ether {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'ether' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <center><label for="greeting">{{ say }}</label></center>
+        <input type="text" name="greeting" class="form-control" required>
+    </div>
+    <input type="submit" value="submit" class="btn btn-secondary btn-block">
+</form>
+
+{% endblock %}
