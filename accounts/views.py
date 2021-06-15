@@ -21,8 +21,8 @@ def register(request):
                     messages.error(request, 'Email already exists')
                     return redirect('register') 
                 else:
-                    # user = myuser.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name, ethereum_account=ethereum_account)
-                    # user.save()
+                    user = myuser.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name, ethereum_account=ethereum_account)
+                    user.save()
                     # auth.login(request, user)
                     messages.success(request, 'Register Successfully')
                     return redirect('login')
@@ -45,7 +45,7 @@ def login(request):
             return redirect('index')
         else:
             messages.error(request, 'Login Failed')
-            return redirect('dash')
+            return redirect('index')
 
     return render(request, 'accounts/login.html')
 
@@ -55,3 +55,7 @@ def logout(request):
         messages.success(request, 'Logged Out Succeeded')
     
     return redirect('index')
+
+def dashboard(request):
+    
+    return render(request, 'accounts/dashboard.html')

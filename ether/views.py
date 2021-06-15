@@ -1,35 +1,21 @@
 from django.shortcuts import render
-from .web import Web
+from .ethereum import Ethereum
 
-w = Web()
-
-web3 = w.connect_to_web3()
-ABI = w.get_abi()
-ADDRESS = '0x7E8351C38B1Df4366D3ED05A3a8C96340e80De25'
-ether_state = False
-
-try:
-    account = web3.eth.accounts[0] # main account
-    if ABI:
-        contract = web3.eth.contract(address=ADDRESS, abi=ABI)
-
-except AttributeError:
-    print('web3 is not connected. Please, check your IP address or PORT')
-
+ethereum = Ethereum()
 
 def check(request):
     say = None
-
-    try:
-        say = contract.functions.say().call()
-        ether_state = True
-    except:
-        """ error message """
-
+   
     if request.method == 'POST':
-        if ether_state:
+        account = request.POST['etherAccount']
+        contract = ethereum.Contract
+        ether_state = True if contract else False
+            
+        if ether_state and 'greeting' in request.POST:
             greeting = request.POST['greeting']
             contract.functions.setGreeting(greeting).transact({'from': account})
+        elif ether_state and 'say' in request.POST:
+            say = contract.functions.say().call()
         else:
             """ error message """
 
