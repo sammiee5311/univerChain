@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from .models import myuser
+from ether.ethereum import Ethereum
+
+ethereum = Ethereum()
 
 def register(request):
     if request.method == 'POST':
@@ -57,5 +60,16 @@ def logout(request):
     return redirect('index')
 
 def dashboard(request):
-    
-    return render(request, 'accounts/dashboard.html')
+    account = request.user.ethereum_account
+    contract = ethereum.Contract
+    ether_state = True if contract else False
+    coin = 0
+
+    if ether_state:
+        coin = contract.functions.getEtherBalance().call({ 'from':account }) 
+        
+    context = {
+        'coin': coin,
+    }
+
+    return render(request, 'accounts/dashboard.html', context)

@@ -9,7 +9,7 @@ class Ethereum:
         self.ip = 'localhost' # default ip
         self.port = '8545' # default port
         self.filename = './files/abi.yml' # default abi file
-        self.SMART_CONTRACT_ADDRESS = '0x7E8351C38B1Df4366D3ED05A3a8C96340e80De25'
+        self.SMART_CONTRACT_ADDRESS = '0x1d555a31a5b5b5619AF474901d3c8870343B9e99'
         self.SMART_CONTTRACT_ABI = self.get_abi()
         self.web3 = self.connect_to_web3()
         self.__contract = self.get_contract()
