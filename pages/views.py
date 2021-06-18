@@ -3,6 +3,10 @@ from django.http import HttpResponse
 
 
 def index(request):
+
+    if request.method == 'POST':
+        category = request.POST['category']
+        print(category)
     context = {
         'title' : 'index'
     }
