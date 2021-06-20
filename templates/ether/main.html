@@ -6,25 +6,45 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+<div class="container p-5 bg-secondary bg-gradient radius-2">
+    {% include 'partials/_alerts.html' %}
+    {% if user.is_authenticated %}
     <form action="{% url 'ether' %}" method="POST">
         {% csrf_token %}
-        <center><label for="greeting">{{ say }}</label></center>
-        <input type="hidden" name="say" value="true">
+        <h1 class="text-white">register state :  <small>{{ registered }}</small></h1>
+        <input type="hidden" name="registered" value="true">
         <input type="hidden" name="etherAccount" value="{{ user.ethereum_account }}">
-        <input type="submit" value="submit" class="btn btn-secondary btn-block">
+        <input type="submit" value="check if you are registered or not !" class="btn btn-primary">
     </form>
+    <h3 class="text-white p-5">registered yet ?  <small><u>Try to register simply by filling a form !</u></small></h3>
     <form action="{% url 'ether' %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <input type="text" name="greeting" class="form-control" required>
+        <div class="form-row">
+            {% csrf_token %}
+            <div class="col-md-4">
+                <label class="sr-only">type</label>
+                <select name="type_name" class="form-control">
+                    <option selected="true" disabled="disabled">Type (All)</option>
+                    <option value="student">Student</option>
+                    <option value="professor">Professor</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="sr-only">grade</label>
+                <select name="grade" class="form-control">
+                    <option selected="true" disabled="disabled">Grade (All)</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                </select>
+            </div>
+            <input type="hidden" name="etherAccount" value="{{ user.ethereum_account }}">
+            <button type="submit" class="col-md-4 btn btn-primary">Submit</button>
         </div>
-        <input type="hidden" name="etherAccount" value="{{ user.ethereum_account }}">
-        <input type="submit" value="submit" class="btn btn-secondary btn-block">
     </form>
-{% else %}
+    {% else %}
     <div> Please, Login. </div>
-
-{% endif %}
+    {% endif %}
+</div>
 
 {% endblock %}
