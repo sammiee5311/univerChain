@@ -7,7 +7,7 @@ db.sqlite3
 db.sqlite3-journal
 /media
 /static
-
+migrations/
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
@@ -20,6 +20,7 @@ db.sqlite3-journal
 # Distribution / packaging
 .Python
 build/
+tests/
 develop-eggs/
 dist/
 downloads/
