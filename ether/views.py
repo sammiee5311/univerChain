@@ -21,7 +21,7 @@ def check(request):
                 messages.error(request, 'User already existed.')
                 
         elif ether_state and 'registered' in request.POST:
-            registered = contract.functions.registeredStudent(account).call({'from': account})
+            registered = contract.functions.checkRegistered().call({'from': account})
             registered = 'currently registered' if registered else 'you are not registered.'
         else:
             """ error message """
