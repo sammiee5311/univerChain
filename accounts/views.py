@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages, auth
-from .models import myuser
+from django.contrib import auth, messages
+from django.shortcuts import redirect, render
+
 from ether.ethereum import Ethereum
 
+from .models import myuser
+
 ethereum = Ethereum()
+
 
 def register(request):
     if request.method == 'POST':
@@ -22,9 +25,10 @@ def register(request):
             else:
                 if myuser.objects.filter(email=email).exists():
                     messages.error(request, 'Email already exists')
-                    return redirect('register') 
+                    return redirect('register')
                 else:
-                    user = myuser.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name, ethereum_account=ethereum_account)
+                    user = myuser.objects.create_user(username=username, password=password, email=email,
+                        first_name=first_name, last_name=last_name, ethereum_account=ethereum_account)
                     user.save()
                     # auth.login(request, user)
                     messages.success(request, 'Register Successfully')
@@ -34,6 +38,7 @@ def register(request):
             return redirect('register')
 
     return render(request, 'accounts/register.html')
+
 
 def login(request):
     if request.method == 'POST':
@@ -52,12 +57,14 @@ def login(request):
 
     return render(request, 'accounts/login.html')
 
+
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         messages.success(request, 'Logged Out Succeeded')
-    
+
     return redirect('index')
+
 
 def dashboard(request):
     account = request.user.ethereum_account
@@ -66,8 +73,7 @@ def dashboard(request):
     coin = 0
 
     if ether_state:
-        coin = contract.functions.getEtherBalance().call({ 'from':account }) 
-        
+        coin = contract.functions.balanceOf(account).call({'from': account})
     context = {
         'coin': coin,
     }

@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from accounts.models import myuser
 
 
@@ -8,14 +10,19 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
-    
+
+    def get_absolute_url(self):
+        return reverse('store:category_list', args=[self.slug])
+
     def __str__(self):
         return self.name
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
-    created_by = models.ForeignKey(myuser, on_delete=models.CASCADE, related_name='product_creator')
+    category = models.ForeignKey(Category, related_name='product',
+                                 on_delete=models.CASCADE)
+    created_by = models.ForeignKey(myuser, on_delete=models.CASCADE,
+                                   related_name='product_creator')
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
     description = models.TextField(blank=True)
@@ -26,10 +33,13 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         verbose_name_plural = 'Products'
         ordering = ('-created',)
+
+    def get_absolute_url(self):
+        return reverse('store:product_detail', args=[self.slug])
 
     def __str__(self):
         return self.title
