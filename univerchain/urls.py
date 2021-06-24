@@ -9,6 +9,7 @@ urlpatterns = [
     path('ether/', include('ether.urls')),
     path('accounts/', include('accounts.urls')),
     path('store/', include('store.urls', namespace='store')),
+    path('cart/', include('cart.urls', namespace='cart')),
 ]
 
 if settings.DEBUG:
