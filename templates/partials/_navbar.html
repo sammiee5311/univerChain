@@ -15,44 +15,55 @@
           <a class="nav-link" href="{% url 'ether' %}">Ether</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             Store
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="{% url 'store:product_all' %}"> All </a></li>
             {% for category in categories %}
-              <li>
-                <a class="dropdown-item" href="{{ category.get_absolute_url }}">{{ category.name|title }} </a>
-              </li>
+            <li>
+              <a class="dropdown-item" href="{{ category.get_absolute_url }}">{{ category.name|title }} </a>
+            </li>
             {% endfor %}
           </ul>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
-          <li>
-            <a class="nav-link" href="{% url 'dashboard' %}">
-                Welcome, {{ user.username }} (Dashboard) </a>
-          </li>
-          <li class="nav-item mr-3">
-            <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-            <form action="{% url 'logout' %}" method="POST" id="logout">
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
-          </li>
+        <li>
+          <a class="nav-link" href="{% url 'dashboard' %}">
+            Welcome, {{ user.username }} (Dashboard) </a>
+        </li>
+        <li>
+          <a class="nav-link" href="{% url 'cart:cart_summary' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart"
+              viewBox="0 0 16 16">
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg>
+            Cart
+          </a>
+        </li>
+        <li class="nav-item mr-3">
+          <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+          <form action="{% url 'logout' %}" method="POST" id="logout">
+            {% csrf_token %}
+            <input type="hidden">
+          </form>
+        </li>
         {% else %}
-          <li>
-            <a class="nav-link" href="{% url 'register' %}">
-              <i class="fas fa-user-plus"></i> Register</a>
-          </li>
-          <li>
-            <a class="nav-link" href="{% url 'login' %}">
-              <i class="fas fa-sign-in-alt"></i>
-              Login</a>
-          </li>
+        <li>
+          <a class="nav-link" href="{% url 'register' %}">
+            <i class="fas fa-user-plus"></i> Register</a>
+        </li>
+        <li>
+          <a class="nav-link" href="{% url 'login' %}">
+            <i class="fas fa-sign-in-alt"></i>
+            Login</a>
+        </li>
         {% endif %}
       </ul>
     </div>

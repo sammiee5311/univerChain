@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block title %} | ether {% endblock %}
 
@@ -7,14 +7,14 @@
 {% block content %}
 
 <section id="showcase-inner" class="py-5 text-black">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="display-4">User Dashboard</h1>
-          <p class="lead">Check usage of coins.</p>
-        </div>
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">User Dashboard</h1>
+        <p class="lead">Check usage of coins.</p>
       </div>
     </div>
+  </div>
 </section>
 
 <section id="bc" class="mt-3">
@@ -36,25 +36,25 @@
     <div class="row">
       <div class="col-md-12">
         <h2>Welcome {{ user.username }} <a style="float:right;"> coins : {{ coin }}</a></h2>
-          <p>Here is the order history that you've bought.</p>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>A Book</td>
-                <td>1 Coin</td>
-                <td>2021-06-16</td>
-              </tr>
-            </tbody>
-          </table>
+        <p>Here is the order history that you've bought.</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>A Book</td>
+              <td>1 Coin</td>
+              <td>2021-06-16</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

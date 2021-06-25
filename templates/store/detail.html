@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block title %} | store {% endblock %}
 
@@ -9,12 +9,13 @@
     <main class="pt-5">
         <div class="row g-3">
             <div class="col-md-5 col-lg-5 order-md-first bg-light">
-                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ product.image.url }}">
+                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image"
+                    src="{{ product.image.url }}">
             </div>
             <div class="col-md-7 col-lg-7 ps-md-3 ps-lg-5">
                 <h1 class="mb-0 h4">{{ product.title }}</h1>
                 {% if product.author is not None %}
-                    <p><span class="lead">{{ product.author }}</span> (Author)</p>
+                <p><span class="lead">{{ product.author }}</span> (Author)</p>
                 {% endif %}
                 <p>{{ product.description|slice:":355" }}...</p>
                 <div class="border">
@@ -35,8 +36,10 @@
                                     <option value="">4</option>
                                 </select>
                             </div>
-                            <div class="col-6 text-end"><button type="button" class="btn btn-secondary btn-sm">Add to
-                                    basket</button></div>
+                            <div class="col-6 text-end"><button type="button" id="add-button" value="{{ product.id }}"
+                                    class="btn btn-secondary btn-sm"
+                                    onClick="addToCart('{% url "cart:cart_add" %}', '{{ csrf_token }}')">Add to
+                                    Cart</button></div>
                         </div>
                     </div>
                 </div>
@@ -44,4 +47,7 @@
         </div>
     </main>
 </div>
+
+<script src="{% static 'js/cart.js' %}"></script>
+
 {% endblock %}

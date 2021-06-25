@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block title %} | ether {% endblock %}
 
@@ -11,12 +11,12 @@
     {% if user.is_authenticated %}
     <form action="{% url 'ether' %}" method="POST">
         {% csrf_token %}
-        <h1 class="text-white">register state :  <small>{{ registered }}</small></h1>
+        <h1 class="text-white">register state : <small>{{ registered }}</small></h1>
         <input type="hidden" name="registered" value="true">
         <input type="hidden" name="etherAccount" value="{{ user.ethereum_account }}">
         <input type="submit" value="check if you are registered or not !" class="btn btn-primary">
     </form>
-    <h3 class="text-white p-5">registered yet ?  <small><u>Try to register simply by filling a form !</u></small></h3>
+    <h3 class="text-white p-5">registered yet ? <small><u>Try to register simply by filling a form !</u></small></h3>
     <form action="{% url 'ether' %}" method="POST">
         <div class="form-row">
             {% csrf_token %}

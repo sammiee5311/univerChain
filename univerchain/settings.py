@@ -22,7 +22,7 @@ SECRET_KEY = ''
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1']
+ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'accounts.MyUser'
 
@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'store.context_processors.categories',
+                'cart.context_processors.cart',
             ],
         },
     },
