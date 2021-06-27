@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
-
 from store.models import Product
 
 from .cart import Cart
@@ -18,9 +17,21 @@ def cart_add(request):
     cart = Cart(request)
     if request.POST.get('action') == 'post':
         product_id = int(request.POST.get('productId'))
-        product_qty = int(request.POST.get('productQty'))
         product = get_object_or_404(Product, id=product_id)
-        cart.add(product, product_qty)
+        cart.add(product)
+
         total_qty = cart.Total_Qty
         response = JsonResponse({'qty': total_qty})
+
+        return response
+
+
+def cart_remove(request):
+    cart = Cart(request)
+    if request.POST.get('action') == 'post':
+        product_id = request.POST.get('productId')
+        cart.remove(product_id)
+
+        response = JsonResponse({'Success': True, 'total_price': cart.get_total_price()})
+
         return response

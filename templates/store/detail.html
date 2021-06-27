@@ -27,15 +27,6 @@
                     </div>
                     <div class="col">
                         <div class="row p-3">
-                            <div class="col-6">
-                                <label for="select">Qty</label>
-                                <select id="select">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                </select>
-                            </div>
                             <div class="col-6 text-end"><button type="button" id="add-button" value="{{ product.id }}"
                                     class="btn btn-secondary btn-sm"
                                     onClick="addToCart('{% url "cart:cart_add" %}', '{{ csrf_token }}')">Add to

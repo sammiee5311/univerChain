@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Optional
 
 import yaml
 from web3 import Web3
@@ -9,7 +9,7 @@ class Ethereum:
         self.ip = 'localhost'  # default ip
         self.port = '8545'  # default port
         self.filename = './files/abi.yml'  # default abi file
-        self.SMART_CONTRACT_ADDRESS = '0x7C659373F261f5C754902728a136FA2C6a8035F6'
+        self.SMART_CONTRACT_ADDRESS = '0x7E8351C38B1Df4366D3ED05A3a8C96340e80De25'
         self.SMART_CONTTRACT_ABI = self.get_abi()
         self.web3 = self.connect_to_web3()
         self.__contract = self.get_contract()
@@ -22,7 +22,7 @@ class Ethereum:
         else:
             return None
 
-    def get_abi(self) -> Dict:
+    def get_abi(self) -> Optional[Any]:
         abi = None
         try:
             with open(self.filename) as f:

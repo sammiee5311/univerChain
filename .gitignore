@@ -9,7 +9,6 @@ db.sqlite3-journal
 /static
 migrations/
 
-
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
 *.py[cod]

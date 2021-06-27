@@ -1,7 +1,6 @@
+from accounts.models import myuser
 from django.db import models
 from django.urls import reverse
-
-from accounts.models import myuser
 
 
 class ProductManager(models.Manager):

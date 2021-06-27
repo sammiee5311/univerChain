@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
-from django.contrib.messages import constants as messages
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +20,7 @@ SECRET_KEY = ''
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1']
 
 AUTH_USER_MODEL = 'accounts.MyUser'
 

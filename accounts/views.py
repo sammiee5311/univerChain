@@ -1,6 +1,5 @@
 from django.contrib import auth, messages
 from django.shortcuts import redirect, render
-
 from ether.ethereum import Ethereum
 
 from .models import myuser
@@ -28,7 +27,8 @@ def register(request):
                     return redirect('register')
                 else:
                     user = myuser.objects.create_user(username=username, password=password, email=email,
-                        first_name=first_name, last_name=last_name, ethereum_account=ethereum_account)
+                                                      first_name=first_name, last_name=last_name,
+                                                      ethereum_account=ethereum_account)
                     user.save()
                     # auth.login(request, user)
                     messages.success(request, 'Register Successfully')
