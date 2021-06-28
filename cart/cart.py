@@ -38,20 +38,18 @@ class Cart():
         return total_price
 
     def add(self, product):
-        product_id = int(product.id)
+        product_id = str(product.id)
 
         if product_id not in self.cart:
             self.cart[product_id] = {'price': str(product.price)}
-
         self.save_session()
 
     def remove(self, product_id):
         try:
             del self.cart[product_id]
+            self.save_session()
         except KeyError:
-            pass
-
-        self.save_session()
+            print("Product Id is incorret.")
 
     def save_session(self):
         self.session.modified = True

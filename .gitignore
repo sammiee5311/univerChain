@@ -1,6 +1,7 @@
 *.log
 *.pot
 *.pyc
+__init__.py
 __pycache__/
 local_settings.py
 db.sqlite3
@@ -20,7 +21,6 @@ migrations/
 # Distribution / packaging
 .Python
 build/
-tests/
 develop-eggs/
 dist/
 downloads/

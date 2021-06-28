@@ -29,9 +29,10 @@ def cart_add(request):
 def cart_remove(request):
     cart = Cart(request)
     if request.POST.get('action') == 'post':
-        product_id = request.POST.get('productId')
+        product_id = str(request.POST.get('productId'))
         cart.remove(product_id)
+        total_price = cart.get_total_price()
 
-        response = JsonResponse({'Success': True, 'total_price': cart.get_total_price()})
+        response = JsonResponse({'Success': True, 'total_price': total_price})
 
         return response
