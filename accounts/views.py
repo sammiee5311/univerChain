@@ -1,43 +1,47 @@
 from django.contrib import auth, messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from ether.ethereum import Ethereum
 
+from .forms import RegisterationForm
 from .models import myuser
+from .tokens import account_activation_token
 
 ethereum = Ethereum()
 
 
 def register(request):
     if request.method == 'POST':
-        request_info = request.POST
-        first_name = request_info['first_name']
-        last_name = request_info['last_name']
-        username = request_info['username']
-        email = request_info['email']
-        password = request_info['password']
-        password_confirm = request_info['password_confirm']
-        ethereum_account = request_info['etherAccount']
-        if password == password_confirm:
-            if myuser.objects.filter(username=username).exists():
-                messages.error(request, 'Username already exists')
-                return redirect('register')
-            else:
-                if myuser.objects.filter(email=email).exists():
-                    messages.error(request, 'Email already exists')
-                    return redirect('register')
-                else:
-                    user = myuser.objects.create_user(username=username, password=password, email=email,
-                                                      first_name=first_name, last_name=last_name,
-                                                      ethereum_account=ethereum_account)
-                    user.save()
-                    # auth.login(request, user)
-                    messages.success(request, 'Register Successfully')
-                    return redirect('login')
-        else:
-            messages.error(request, 'Passwords do not macth')
-            return redirect('register')
+        registerForm = RegisterationForm(request.POST)
 
-    return render(request, 'accounts/register.html')
+        if registerForm.is_valid():
+            user = registerForm.save(commit=False)
+            user.email = RegisterationForm.cleaned_data['email']
+            user.set_password(registerForm.cleaned_data['password'])
+            user.ethereum_account(registerForm.cleaned_data['ethereum_account'])
+            user.is_active = False
+            user.save()
+
+            current_site = get_current_site(request)
+            subject = 'Ativate Account'
+            message = render_to_string('accounts/registration/email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'url': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user)})
+            user.email_user(subject=subject, message=message)
+    else:
+        registerForm = RegisterationForm()
+
+    return render(request, 'accounts/registeration/register.html', {'form': registerForm})
+
+
+def activate(request):
+    pass
 
 
 def login(request):

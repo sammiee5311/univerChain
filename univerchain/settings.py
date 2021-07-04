@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.contrib.messages import constants as messages
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,13 +25,15 @@ DEBUG = True
 ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1']
 
 AUTH_USER_MODEL = 'accounts.MyUser'
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
 
 INSTALLED_APPS = [
     'store',
     'cart',
-    'accounts.apps.AccountsConfig',
-    'ether.apps.EtherConfig',
-    'pages.apps.PagesConfig',
+    'accounts',
+    'ether',
+    'pages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,9 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'univerchain',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'USER': 'admin',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
         'PORT': '',
         'TEST': {
             'NAME': 'mytestdatabase',
@@ -117,5 +121,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+EMAIL_BACKEND = 'django.univerchain.mail.backends.console.EmailBackend'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

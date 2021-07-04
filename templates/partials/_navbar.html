@@ -32,7 +32,7 @@
       <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
         <li>
-          <a class="nav-link" href="{% url 'dashboard' %}">
+          <a class="nav-link" href="{% url 'accounts:dashboard' %}">
             Welcome, {{ user.username }} (Dashboard) </a>
         </li>
         <li>
@@ -49,18 +49,18 @@
           <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
             <i class="fas fa-sign-out-alt"></i> Logout
           </a>
-          <form action="{% url 'logout' %}" method="POST" id="logout">
+          <form action="{% url 'accounts:logout' %}" method="POST" id="logout">
             {% csrf_token %}
             <input type="hidden">
           </form>
         </li>
         {% else %}
         <li>
-          <a class="nav-link" href="{% url 'register' %}">
+          <a class="nav-link" href="{% url 'accounts:register' %}">
             <i class="fas fa-user-plus"></i> Register</a>
         </li>
         <li>
-          <a class="nav-link" href="{% url 'login' %}">
+          <a class="nav-link" href="{% url 'accounts:login' %}">
             <i class="fas fa-sign-in-alt"></i>
             Login</a>
         </li>

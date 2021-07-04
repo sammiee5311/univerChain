@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} | Register {% endblock %}
+
+{% block content %}
+
+<section id="register" class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header text-black">
+            <h4> Register </h4>
+            <h5 style="font-size: 1rem;"> To access all activites in the university. </h5>
+          </div>
+          <div class="card-body">
+            {% if form.errors %}
+            <p>Errors<p>
+                {% for field in form %}
+                {% if field.errors %}
+                <div class="alert alert-primary" role="alert">
+                  {{ field.label }}: {{ field.errors|striptags }}
+                </div>
+                {% endif %} {% endfor %} {% endif %}
+                <form action="{% url 'accounts:register' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="username">{{ form.username.label }}<span class="text-muted small">
+                      </span></label>
+                    {{ form.username }}
+                  </div>
+                  <div class="form-group">
+                    <label for="email">{{ form.email.label }}<span class="text-muted small">
+                      </span></label>
+                    {{ form.email }}
+                  </div>
+                  <div class="form-group">
+                    <label for="password2">{{ form.password.label }}<span class="text-muted small">
+                      </span></label>
+                    {{ form.password }}
+                  </div>
+                  <div class="form-group">
+                    <label for="password">{{ form.password_confirm.label }}<span class="text-muted small">
+                      </span></label>
+                    {{ form.password_confirm }}
+                  </div>
+                  <div class="form-group">
+                    <label for="etherAccount">{{ form.ethereum_account.label }}<span class="text-muted small">
+                      </span></label>
+                    {{ form.ethereum_account }}
+                  </div>
+                  <input type="submit" value="Register" class="btn btn-secondary btn-block">
+                  <p class="text-center p-2">
+                    <a href="{% url 'accounts:login' %}"><u>Already have an account?</u></a>
+                  </p>
+                </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

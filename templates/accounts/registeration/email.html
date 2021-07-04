@@ -1,0 +1,11 @@
+{% autoescape off %}
+
+Hello {{ user.username }},
+
+This is univerChain auto mailing system.
+
+Please, click below linkl to activate yout account.
+
+https://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}
+
+{% endautoescape %}
