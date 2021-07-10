@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordResetForm,
-    SetPasswordForm
+    SetPasswordForm,
 )
 
 from .models import myuser
@@ -58,3 +58,34 @@ class RegisterationForm(forms.ModelForm):
             {'class': 'form-control mb-3', 'placeholder': 'Password Confirmation'})
         self.fields['ethereum_account'].widget.attrs.update(
             {'class': 'form-control mb-3', 'placeholder': 'Account of Ethereum'})
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control mb-3', 'placeholder': 'Username', 'id': 'login-username'}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control mb-3',
+            'placeholder': 'Password',
+            'id': 'loing-pw',
+        }
+    ))
+
+
+class EditForm(forms.ModelForm):
+    email = forms.EmailField(
+        label='Email', max_length=150, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'Email', 'id': 'form-email', 'readonly': 'readonly'}))
+
+    first_name = forms.CharField(
+        label='First Name', min_length=4, max_length=50, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'First Name', 'id': 'form-firstname'}))
+
+    class Meta:
+        model = myuser
+        fields = ('email', 'first_name',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['email'].required = True

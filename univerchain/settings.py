@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
-from django.contrib.messages import constants as messages
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,11 +20,11 @@ SECRET_KEY = ''
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1']
+ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'accounts.MyUser'
-LOGIN_REDIRECT_URL = '/account/dashboard'
-LOGIN_URL = '/account/login/'
+LOGIN_REDIRECT_URL = '/accounts/dashboard'
+LOGIN_URL = '/accounts/login/'
 
 INSTALLED_APPS = [
     'store',
@@ -122,6 +120,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-EMAIL_BACKEND = 'django.univerchain.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

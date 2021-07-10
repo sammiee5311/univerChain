@@ -6,9 +6,9 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 <div class="container p-5 bg-secondary bg-gradient radius-2">
     {% include 'partials/_alerts.html' %}
-    {% if user.is_authenticated %}
     <form action="{% url 'ether' %}" method="POST">
         {% csrf_token %}
         <h1 class="text-white">register state : <small>{{ registered }}</small></h1>
@@ -42,9 +42,11 @@
             <button type="submit" class="col-md-4 btn btn-primary">Submit</button>
         </div>
     </form>
-    {% else %}
-    <div> Please, Login. </div>
-    {% endif %}
 </div>
+{% else %}
+<div class="container p-2">
+    <h1 class="display-3"> Please, Login to see UC coin. </h1>
+</div>
+{% endif %}
 
 {% endblock %}
