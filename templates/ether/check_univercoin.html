@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} | ether {% endblock %}
+{% block title %} | UC {% endblock %}
 
 {% load static %}
 
@@ -9,7 +9,7 @@
 {% if user.is_authenticated %}
 <div class="container p-5 bg-secondary bg-gradient radius-2">
     {% include 'partials/_alerts.html' %}
-    <form action="{% url 'ether' %}" method="POST">
+    <form action="{% url 'univercoin:check_univercoin' %}" method="POST">
         {% csrf_token %}
         <h1 class="text-white">register state : <small>{{ registered }}</small></h1>
         <input type="hidden" name="registered" value="true">
@@ -17,7 +17,7 @@
         <input type="submit" value="check if you are registered or not !" class="btn btn-primary">
     </form>
     <h3 class="text-white p-5">registered yet ? <small><u>Try to register simply by filling a form !</u></small></h3>
-    <form action="{% url 'ether' %}" method="POST">
+    <form action="{% url 'univercoin:check_univercoin' %}" method="POST">
         <div class="form-row">
             {% csrf_token %}
             <div class="col-md-4">
@@ -44,9 +44,17 @@
     </form>
 </div>
 {% else %}
-<div class="container p-2">
-    <h1 class="display-3"> Please, Login to see UC coin. </h1>
+
+<div class="container p-5">
+    <div class="row p-5">
+        <div class="col-md-6 mx-auto">
+            <div class="text-black">
+                <h1 class="text-center">Please, Login to see your UC info.</h1>
+            </div>
+        </div>
+    </div>
 </div>
+
 {% endif %}
 
 {% endblock %}

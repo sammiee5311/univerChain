@@ -10,7 +10,7 @@ def cart_summary(request):
     context = {
         'cart': cart
     }
-    return render(request, 'store/cart/summary.html', context)
+    return render(request, 'cart/summary.html', context)
 
 
 def cart_add(request):
@@ -20,8 +20,8 @@ def cart_add(request):
         product = get_object_or_404(Product, id=product_id)
         cart.add(product)
 
-        total_qty = cart.Total_Qty
-        response = JsonResponse({'qty': total_qty})
+        response = JsonResponse({'qty': cart.Total_Qty})
+        print(response)
 
         return response
 
@@ -32,7 +32,7 @@ def cart_remove(request):
         product_id = str(request.POST.get('productId'))
         cart.remove(product_id)
         total_price = cart.get_total_price()
-
-        response = JsonResponse({'Success': True, 'total_price': total_price})
+        print(total_price)
+        response = JsonResponse({'Success': True, 'totalPrice': total_price})
 
         return response

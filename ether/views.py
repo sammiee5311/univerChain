@@ -6,8 +6,8 @@ from .ethereum import Ethereum
 ethereum = Ethereum()
 
 
-def check(request):
-    registered = None
+def check_univercoin(request):
+    registered = 'You have not checked it yet.'
 
     if request.method == 'POST':
         account = request.POST['etherAccount']
@@ -17,7 +17,6 @@ def check(request):
         if ether_state and 'type_name' in request.POST:
             type_name = request.POST['type_name']
             grade = request.POST['grade']
-            print(type_name, grade)
             try:
                 contract.functions.register(type_name, int(grade)).transact({'from': account})
             except:
@@ -33,4 +32,4 @@ def check(request):
         'registered': registered
     }
 
-    return render(request, 'ether/main.html', context)
+    return render(request, 'ether/check_univercoin.html', context)

@@ -23,6 +23,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'accounts.MyUser'
+CART_SESSION_ID = 'cart'
 LOGIN_REDIRECT_URL = '/accounts/dashboard'
 LOGIN_URL = '/accounts/login/'
 
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
     'accounts',
     'ether',
     'pages',
+    'orders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

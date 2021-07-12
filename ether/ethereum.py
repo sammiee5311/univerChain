@@ -13,6 +13,11 @@ class Ethereum:
         self.SMART_CONTTRACT_ABI = self.get_abi()
         self.web3 = self.connect_to_web3()
         self.__contract = self.get_contract()
+        self.__owner = '0xc9a20626e99b8D336906FB487d07a62265777B78'
+
+    @property
+    def Owner(self):
+        return self.__owner
 
     def connect_to_web3(self) -> Any:
         w3 = Web3(Web3.HTTPProvider(f'http://{self.ip}:{self.port}'))

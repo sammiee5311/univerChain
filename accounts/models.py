@@ -1,7 +1,7 @@
 from django.contrib.auth.models import (
     AbstractUser,
     BaseUserManager,
-    PermissionsMixin
+    PermissionsMixin,
 )
 from django.db import models
 

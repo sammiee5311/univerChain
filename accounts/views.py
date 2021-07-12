@@ -70,7 +70,7 @@ def dashboard(request):
         'coin': coin,
     }
 
-    return render(request, 'accounts/dashboard.html', context)
+    return render(request, 'accounts/user/dashboard.html', context)
 
 
 @login_required
