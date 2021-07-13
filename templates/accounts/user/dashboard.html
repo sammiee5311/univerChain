@@ -52,12 +52,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>A Book</td>
-              <td>1 Coin</td>
-              <td>2021-06-16</td>
-            </tr>
+            {% for order in orders %}
+              {% for item in order.items.all %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td><a href="{{ item.product.get_absolute_url }}">{{ item.product.title }}</a></td>
+                  <td>{{ item.product.price }} UC</td>
+                  <td>{{ order.created }}</td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
           </tbody>
         </table>
       </div>

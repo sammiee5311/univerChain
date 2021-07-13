@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from ether.ethereum import Ethereum
+from orders.views import user_orders
 
 from .forms import EditForm, RegisterationForm
 from .models import myuser
@@ -60,6 +61,7 @@ def activate(request, uidb64, token):
 def dashboard(request):
     account = request.user.ethereum_account
     contract = ethereum.Contract
+    orders = user_orders(request)
     ether_state = True if contract else False
     coin = 0
 
@@ -68,6 +70,7 @@ def dashboard(request):
 
     context = {
         'coin': coin,
+        'orders': orders
     }
 
     return render(request, 'accounts/user/dashboard.html', context)

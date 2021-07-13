@@ -35,8 +35,8 @@ class TestCartView(TestCase):
         response = self.client.post(
             reverse('cart:cart_remove'), {'productId': 2, 'action': 'post'}, xhr=True
         )
-        self.assertEqual(response.json(), {'Success': True, 'total_price': '1.50'})
+        self.assertEqual(response.json(), {'Success': True, 'totalPrice': '1.50'})
         response = self.client.post(
             reverse('cart:cart_remove'), {'productId': 3, 'action': 'post'}, xhr=True
         )
-        self.assertEqual(response.json(), {'Success': True, 'total_price': '1.50'})
+        self.assertEqual(response.json(), {'Success': True, 'totalPrice': '1.50'})
