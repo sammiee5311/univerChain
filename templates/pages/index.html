@@ -15,7 +15,7 @@
       <p class="lead"> Search many things by category.</p>
     </div>
     <div class="w3-container background w3-padding-16">
-      <form action="{% url 'index' %}" method="POST">
+      <form action="{% url 'pages:index' %}" method="POST">
         {% csrf_token %}
         <div class="w3-row-padding" style="margin:0 -16px;">
           <div class="w3-half w3-margin-bottom">

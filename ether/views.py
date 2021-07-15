@@ -19,7 +19,7 @@ def check_univercoin(request):
             grade = request.POST['grade']
             try:
                 contract.functions.register(type_name, int(grade)).transact({'from': account})
-            except:
+            except BaseException:
                 messages.error(request, 'User already existed.')
 
         elif ether_state and 'registered' in request.POST:

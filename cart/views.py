@@ -8,7 +8,8 @@ from .cart import Cart
 def cart_summary(request):
     cart = Cart(request)
     context = {
-        'cart': cart
+        'cart': cart,
+        'cart_items': cart.Total_Qty
     }
     return render(request, 'cart/summary.html', context)
 

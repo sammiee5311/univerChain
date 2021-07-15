@@ -8,7 +8,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from ether.ethereum import Ethereum
 from orders.views import user_orders
 
-from .forms import EditForm, RegisterationForm
+from .forms import EditForm, RegistrationForm
 from .models import myuser
 from .tokens import account_activation_token
 
@@ -17,36 +17,36 @@ ethereum = Ethereum()
 
 def register(request):
     if request.method == 'POST':
-        regitseration_form = RegisterationForm(request.POST)
+        regitseration_form = RegistrationForm(request.POST)
 
         if regitseration_form.is_valid():
             user = regitseration_form.save(commit=False)
             user.email = regitseration_form.cleaned_data['email']
             user.set_password(regitseration_form.cleaned_data['password'])
-            user.ethereum_account = regitseration_form.cleaned_data['ethereum_account']
+            user.univercoin_account = regitseration_form.cleaned_data['univercoin_account']
             user.is_active = False
             user.save()
 
             current_site = get_current_site(request)
             subject = 'Ativate Account'
-            message = render_to_string('accounts/registeration/email.html', {
+            message = render_to_string('accounts/registration/email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user)})
             user.email_user(subject=subject, message=message)
-            return redirect('index')
+            return redirect('pages:index')
     else:
-        regitseration_form = RegisterationForm()
+        regitseration_form = RegistrationForm()
 
-    return render(request, 'accounts/registeration/register.html', {'form': regitseration_form})
+    return render(request, 'accounts/registration/register.html', {'form': regitseration_form})
 
 
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = myuser.objects.get(pk=uid)
-    except():
+    except BaseException:
         pass
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
@@ -54,7 +54,7 @@ def activate(request, uidb64, token):
         auth.login(request, user)
         return redirect('accounts:dashboard')
     else:
-        return render(request, 'accounts/registeration/invalid.html')
+        return render(request, 'accounts/registration/invalid.html')
 
 
 @login_required

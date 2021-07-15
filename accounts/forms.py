@@ -8,13 +8,13 @@ from django.contrib.auth.forms import (
 from .models import myuser
 
 
-class RegisterationForm(forms.ModelForm):
+class RegistrationForm(forms.ModelForm):
     username = forms.CharField(label='Username', min_length=4, max_length=50, help_text='Required')
     email = forms.EmailField(max_length=100, help_text='Required',
                              error_messages={'required': 'Please, type a valid email'})
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password_confirm = forms.CharField(label='Password Confirm', widget=forms.PasswordInput)
-    ethereum_account = forms.CharField(label='Ethereum Account', max_length=512, help_text='Required')
+    univercoin_account = forms.CharField(label='UniverCoin Account', max_length=512, help_text='Required')
 
     class Meta:
         model = myuser
@@ -56,8 +56,8 @@ class RegisterationForm(forms.ModelForm):
             {'class': 'form-control mb-3', 'placeholder': 'Password'})
         self.fields['password_confirm'].widget.attrs.update(
             {'class': 'form-control mb-3', 'placeholder': 'Password Confirmation'})
-        self.fields['ethereum_account'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Account of Ethereum'})
+        self.fields['univercoin_account'].widget.attrs.update(
+            {'class': 'form-control mb-3', 'placeholder': 'Account of UniverCoin'})
 
 
 class LoginForm(AuthenticationForm):

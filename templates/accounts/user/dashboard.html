@@ -6,23 +6,18 @@
 
 {% block content %}
 
-<section id="showcase-inner" class="py-5 text-black">
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-md-12">
-        <h1 class="display-4">User Dashboard</h1>
-        <p class="lead">Check usage of coins.</p>
-      </div>
+<section class="py-5 text-center container">
+  <div class="row py-lg-3">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="display-4">Dashboard</h1>
+      <p class="lead text-muted p-2">Check usage of coins.</p>
     </div>
   </div>
-</section>
-
-<section id="bc" class="mt-3">
-  <div class="container">
+    <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="{% url 'index' %}">
+          <a href="{% url 'pages:index' %}">
             <i class="fas fa-home"></i> Home</a>
         </li>
         <li class="breadcrumb-item active"> Dashboard</li>
@@ -36,7 +31,7 @@
   </div>
 </section>
 
-<section id="dashboard" class="py-4">
+<section id="dashboard" class="py-2">
   <div class="container">
     <div class="row">
       <div class="col-md-12">

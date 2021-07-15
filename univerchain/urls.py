@@ -4,8 +4,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include('pages.urls')),
     path('admin/', admin.site.urls),
+    path('', include('pages.urls', namespace='pages')),
     path('univercoin/', include('ether.urls', namespace='univercoin')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('store/', include('store.urls', namespace='store')),

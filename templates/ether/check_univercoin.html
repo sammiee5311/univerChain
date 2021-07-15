@@ -7,16 +7,26 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<div class="container p-5 bg-secondary bg-gradient radius-2">
+<section class="py-5 text-center container">
+    <div class="row py-lg-3">
+        <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="display-4">Status</h1>
+        <p class="lead text-muted p-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Nunc blandit ante scelerisque augue consectetur iaculis.</p>
+        </div>
+    </div>
+</section>
+<div class="container p-5 radius-2">
     {% include 'partials/_alerts.html' %}
     <form action="{% url 'univercoin:check_univercoin' %}" method="POST">
         {% csrf_token %}
-        <h1 class="text-white">register state : <small>{{ registered }}</small></h1>
+        <h1 class="text-black">register state :</h1>
+        <h2 class="text-black"><small>{{ registered }}</small></h2>
         <input type="hidden" name="registered" value="true">
         <input type="hidden" name="etherAccount" value="{{ user.ethereum_account }}">
         <input type="submit" value="check if you are registered or not !" class="btn btn-primary">
     </form>
-    <h3 class="text-white p-5">registered yet ? <small><u>Try to register simply by filling a form !</u></small></h3>
+    <h3 class="text-black p-5">registered yet ? <p><small><u>Try to register simply by filling a form !</u></small></p></h3>
     <form action="{% url 'univercoin:check_univercoin' %}" method="POST">
         <div class="form-row">
             {% csrf_token %}

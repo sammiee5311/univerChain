@@ -16,20 +16,20 @@ def category_list(request, category_slug):
 
 
 def product_all(request):
-    prods = Product.products.all()
+    products = Product.products.all()
 
     context = {
-        'products': prods
+        'products': products
     }
 
     return render(request, 'store/main.html', context)
 
 
 def product_detail(request, slug):
-    prod = get_object_or_404(Product, slug=slug, in_stock=True)
+    product = get_object_or_404(Product, slug=slug, in_stock=True)
 
     context = {
-        'product': prod
+        'product': product
     }
 
     return render(request, 'store/detail.html', context)

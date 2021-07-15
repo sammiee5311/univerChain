@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block title %} | store {% endblock %}
 
@@ -7,15 +7,27 @@
 {% block content %}
 
 <main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-3">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="display-4">Store</h1>
+        <p class="lead text-muted p-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nunc blandit ante scelerisque augue consectetur iaculis.</p>
+      </div>
+    </div>
+  </section>
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="pb-3 h5">{{ category.name|title }}</div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+        {% if not products %}
+        <div class="col-12">There are no products.</div>
+        {% else %}
         {% for product in products %}
         <div class="col">
           <div class="card shadow-sm">
             <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">
-                <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
+              <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
             </a>
             <div class="card-body">
               <p class="card-text">
@@ -28,6 +40,7 @@
           </div>
         </div>
         {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>
