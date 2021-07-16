@@ -7,9 +7,10 @@ from django.db import models
 
 
 class CustomAccountManager(BaseUserManager):
-    def create_superuser(self, email, username, password, ethereum_account, **other_fields):
+    def create_superuser(self, email, username, password, **other_fields):
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
+        ethereum_account = 'superuser'
 
         if other_fields.get('is_staff') is not True:
             raise ValueError('Wrong Value : is_staff=False')

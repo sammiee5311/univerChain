@@ -11,13 +11,15 @@
             <div class="col-12 d-flex justify-content-between">
             </div>
             <div class="col-md-5 ps-3 col-lg-5 order-md-last p-5 order-1">
-                <div class="d-grid gap-2">
-
+                <div class="d-grid gap-2 py-4">
                     <div class="d-flex d-flex-inline justify-content-between">
                         <div><span class="h3">{{ product.price }} UC</span>
                         </div>
                     </div>
                     <hr>
+                    <div class="py-4">
+                        {{product.description}}
+                    </div>
                     <button type="button" id="add-button" value="{{product.id}}" onClick="addToCart('{% url "cart:cart_add" %}', '{{ csrf_token }}')" class="btn btn-success btn-lg btn-block">Add to
                         cart</button>
                 </div>
