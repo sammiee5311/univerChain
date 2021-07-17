@@ -16,11 +16,11 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = ''
+SECRET_KEY = 'django-insecure-)w2vafq=wz7@0#db@t-!1ab7^t=7wy4s@zf#ef_!()424m@+v'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['univerchain.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'accounts.MyUser'
 CART_SESSION_ID = 'cart'
@@ -76,15 +76,8 @@ WSGI_APPLICATION = 'univerchain.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'univerchain',
-        'USER': 'admin',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '',
-        'TEST': {
-            'NAME': 'mytestdatabase',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
