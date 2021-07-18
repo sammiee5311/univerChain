@@ -17,14 +17,17 @@ def cart_summary(request):
 def cart_add(request):
     cart = Cart(request)
     if request.POST.get('action') == 'post':
-        product_id = int(request.POST.get('productId'))
-        product = get_object_or_404(Product, id=product_id)
-        cart.add(product)
+        if request.user.is_authenticated():
+            product_id = int(request.POST.get('productId'))
+            product = get_object_or_404(Product, id=product_id)
+            cart.add(product)
 
-        response = JsonResponse({'qty': cart.Total_Qty})
-        print(response)
+            response = JsonResponse({'qty': cart.Total_Qty})
+            print(response)
 
-        return response
+            return response
+        else:
+            return render(request, 'cart/add_to_cart_fail.html')
 
 
 def cart_remove(request):
