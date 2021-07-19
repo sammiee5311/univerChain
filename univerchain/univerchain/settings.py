@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'ether',
     'pages',
     'orders',
+    'attendance',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
