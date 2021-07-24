@@ -1,0 +1,45 @@
+.background{
+    background: rgba(51, 51, 51, 0.8);
+    color: #fff;
+}
+
+.radius-2{
+    border-radius: 2rem;
+}
+
+.radius-3{
+    border-radius: 3rem;
+}
+
+.top-background{
+    background-color: rgba(238, 225, 197, 0.692);
+}
+
+.text-align-right{
+    text-align: right;
+}
+
+.cart-qty{
+    color: #fff;
+    background: #d42114;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 11px;
+    height: 15px;
+    width: 14px;
+    position: absolute;
+    box-sizing: content-box;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 1px;
+    right: 10px;
+}
+
+@media (max-width: 600px){
+    #search-box{
+        display:none;
+    }
+}
