@@ -5,7 +5,7 @@ from django.contrib.auth.forms import (
     SetPasswordForm,
 )
 
-from .models import myuser
+from .models import MyUser
 
 
 class RegistrationForm(forms.ModelForm):
@@ -17,12 +17,12 @@ class RegistrationForm(forms.ModelForm):
     univercoin_account = forms.CharField(label='UniverCoin Account', max_length=512, help_text='Required')
 
     class Meta:
-        model = myuser
+        model = MyUser
         fields = ('username', 'email',)
 
     def clean_username(self):
         cleaned_name = self.cleaned_data['username'].lower()
-        duplication = myuser.objects.filter(username=cleaned_name)
+        duplication = MyUser.objects.filter(username=cleaned_name)
 
         if duplication.count():
             raise forms.ValidationError('Username already exists')
@@ -39,7 +39,7 @@ class RegistrationForm(forms.ModelForm):
 
     def clean_email(self):
         cleaned_email = self.cleaned_data['email']
-        duplication = myuser.objects.filter(email=cleaned_email)
+        duplication = MyUser.objects.filter(email=cleaned_email)
 
         if duplication.exists():
             raise forms.ValidationError('Email already exists')
@@ -82,7 +82,7 @@ class EditForm(forms.ModelForm):
             attrs={'class': 'form-control mb-3', 'placeholder': 'First Name'}))
 
     class Meta:
-        model = myuser
+        model = MyUser
         fields = ('email', 'first_name',)
 
     def __init__(self, *args, **kwargs):
@@ -98,7 +98,7 @@ class PassWordResetForm(PasswordResetForm):
 
     def clean_email(self):
         cleaned_email = self.cleaned_data['email']
-        user = myuser.objects.filter(email=cleaned_email)
+        user = MyUser.objects.filter(email=cleaned_email)
 
         if not user:
             raise forms.ValidationError('Email does not exist.')

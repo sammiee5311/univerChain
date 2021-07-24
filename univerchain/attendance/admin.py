@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Class, Attendance
+
+admin.site.register(Class)
+admin.site.register(Attendance)

@@ -1,6 +1,6 @@
 from importlib import import_module
 
-from accounts.models import myuser
+from accounts.models import MyUser
 from django.conf import settings
 from django.http import HttpRequest
 from django.test import Client, TestCase
@@ -15,7 +15,7 @@ from store.views import product_all
 class TestViewResponses(TestCase):
     def setUp(self):
         self.client = Client()
-        myuser.objects.create(id=1, username='admin')
+        MyUser.objects.create(id=1, username='admin')
         Category.objects.create(id=1, name='book', slug='book')
         Product.objects.create(category_id=1, title='django book', created_by_id=1,
                                slug='django-book', price='1.5', image='django')
@@ -27,7 +27,7 @@ class TestViewResponses(TestCase):
         response = self.client.get('/store/')
         self.assertEqual(response.status_code, 200)
         response = self.client.get('/', HTTP_HOST='example.com')
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 200)
         response = self.client.get('/', HTTP_HOST='univerchain.com')
         self.assertEqual(response.status_code, 200)
 

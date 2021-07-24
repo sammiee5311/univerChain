@@ -1,12 +1,14 @@
-from accounts.models import myuser
-from django.test import TestCase
+from accounts.models import MyUser
+from django.test import TestCase, Client
 from django.urls import reverse
 from store.models import Category, Product
 
 
 class TestCartView(TestCase):
     def setUp(self):
-        myuser.objects.create(id=1, username='admin')
+        self.client_without_login = Client()
+        self.user = MyUser.objects.create(id=1, username='admin')
+        self.client.force_login(self.user)
         Category.objects.create(id=1, name='book', slug='book')
         Product.objects.create(id=1, category_id=1, title='django book', created_by_id=1,
                                slug='django-book', price=1.5, image='django')
@@ -26,10 +28,14 @@ class TestCartView(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_cart_add(self):
-        response = self.client.post(
+        response_with_login = self.client.post(
             reverse('cart:cart_add'), {'productId': 3, 'action': 'post'}, xhr=True
         )
-        self.assertEqual(response.json(), {'qty': 3})
+        response_without_login = self.client_without_login.post(
+            reverse('cart:cart_add'), {'productId': 3, 'action': 'post'}, xhr=True
+        )
+        self.assertEqual(response_with_login.json(), {'qty': 3})
+        self.assertIsNotNone(response_without_login.context['cart'])
 
     def test_cart_remove(self):
         response = self.client.post(

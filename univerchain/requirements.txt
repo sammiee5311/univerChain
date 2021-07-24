@@ -4,4 +4,7 @@ PyYAML==5.4.1
 Pillow==7.0.0
 isort==5.9.1
 flake8==3.9.2
+psycopgy2
 uwsgi
+djangoresframework
+django-debug-toolbar

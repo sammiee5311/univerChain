@@ -1,4 +1,4 @@
-from accounts.models import myuser
+from accounts.models import MyUser
 from django.test import TestCase
 from django.urls import reverse
 from store.models import Category, Product
@@ -25,7 +25,7 @@ class TestCategoriesModel(TestCase):
 
 class TestProductsModel(TestCase):
     def setUp(self):
-        myuser.objects.create(id=1, username='admin')
+        MyUser.objects.create(id=1, username='admin')
         Category.objects.create(id=1, name='book', slug='book')
         self.data = Product.objects.create(category_id=1, title='django book', created_by_id=1,
                                            slug='django-book', price='1.5', image='django')
