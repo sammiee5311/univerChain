@@ -13,7 +13,7 @@ urlpatterns = [
     path("cart/", include("cart.urls", namespace="cart")),
     path("orders/", include("orders.urls", namespace="orders")),
     path("attendance/", include("attendance.urls", namespace="attendance")),
-    path("__debug__/", include(debug_toolbar.urls))
+    path("__debug__/", include(debug_toolbar.urls)),
 ]
 
 if settings.DEBUG:

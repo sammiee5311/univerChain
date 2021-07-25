@@ -4,7 +4,7 @@ from django.conf import settings
 from store.models import Product
 
 
-class Cart():
+class Cart:
     def __init__(self, request):
         self.session = request.session
 
@@ -21,11 +21,11 @@ class Cart():
 
     def __iter__(self):
         product_ids = self.cart.keys()
-        products = Product.products.filter(id__in=product_ids)
+        products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
 
         for product in products:
-            cart[str(product.id)]['product'] = product
+            cart[str(product.id)]["product"] = product
 
         for item in cart.values():
             yield item
@@ -34,7 +34,7 @@ class Cart():
         total_price = 0
 
         for item in self.cart.values():
-            total_price += Decimal(item['price'])
+            total_price += Decimal(item["price"])
 
         return total_price
 
@@ -42,7 +42,7 @@ class Cart():
         product_id = str(product.id)
 
         if product_id not in self.cart:
-            self.cart[product_id] = {'price': str(product.price)}
+            self.cart[product_id] = {"price": str(product.regular_price)}
         self.save_session()
 
     def remove(self, product_id):

@@ -1,49 +1,50 @@
-{% extends 'base.html' %}
-
-{% block title %} | store {% endblock %}
-
-{% load static %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %} | store {% endblock %} {% load
+static %} {% block content %}
 
 <main>
-
   <section class="py-5 text-center container">
     <div class="row py-lg-3">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="display-4">Store</h1>
-        <p class="lead text-muted p-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Nunc blandit ante scelerisque augue consectetur iaculis.</p>
+        <p class="lead text-muted p-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit
+          ante scelerisque augue consectetur iaculis.
+        </p>
       </div>
     </div>
   </section>
 
   <div class="album py-5 bg-light">
     <div class="container">
-
       <div class="pb-3 h5">All Products</div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
         {% if not products %}
         <div class="col-12">There are no products.</div>
-        {% else %}
-        {% for product in products %}
+        {% else %} {% for product in products %}
         <div class="col">
           <div class="card shadow-sm">
             <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">
-              <img class="img-fluid" alt="Responsive image" src="{{ product.image.url }}">
+              {% for product_image in product.product_image.all %} 
+                {% if product_image.is_feature %}
+                <img
+                  class="img-fluid"
+                  alt="Responsive image"
+                  src="{{ product_image.image.url }}"
+                  alt="{{ product_image.image.alt_text }}">
+                {% endif %}
+              {% endfor %}
             </a>
             <div class="card-body">
               <p class="card-text">
                 <a class="text-dark text-decoration-none" href="{{ product.get_absolute_url }}">{{ product.title }}</a>
               </p>
               <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">{{ product.price }} UC</small>
+                <small class="text-muted">{{ product.regular_price }} UC</small>
               </div>
             </div>
           </div>
         </div>
-        {% endfor %}
-        {% endif %}
+        {% endfor %} {% endif %}
       </div>
     </div>
   </div>

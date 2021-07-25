@@ -13,7 +13,7 @@
             <div class="col-md-5 ps-3 col-lg-5 order-md-last p-5 order-1">
                 <div class="d-grid gap-2 py-4">
                     <div class="d-flex d-flex-inline justify-content-between">
-                        <div><span class="h3">{{ product.price }} UC</span>
+                        <div><span class="h3">{{ product.regular_price }} UC</span>
                         </div>
                     </div>
                     <hr>
@@ -31,8 +31,12 @@
                         <div class="col-md-12">
                             <div class="card-body p-1">
                                 <h1 class="mb-0 h2 pe-4 pb-4">{{ product.title }}</h1>
-                                <div class="bg-light"><img class="img-fluid mx-auto d-block" width="200px"
-                                        alt="Responsive image" src="{{ product.image.url }}"> </div>
+                                {% for product_image in product.product_image.all %}
+                                    {% if product_image.is_feature %}
+                                        <div class="bg-light"><img class="img-fluid mx-auto d-block" width="200px"
+                                                alt="Responsive image" src="{{ product_image.image.url }}" alt="{{ product_image.image.alt_text }}"></div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

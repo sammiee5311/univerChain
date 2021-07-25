@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "pages",
     "orders",
     "attendance",
+    "mptt",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

@@ -14,7 +14,7 @@
         <div class="col-12">
             <p>Manage your <b>items</b> in your cart</p>
         </div>
-        <hr/>
+        <hr />
     </div>
     <div class="container" style="max-width: 1000px">
         <div class="row g-3">
@@ -32,7 +32,8 @@
             </div>
             <div class="p-3 col-md-5 col-lg-4 order-md-last order-3">
                 <div class="d-grid gap-2">
-                    <a role="button" href="{% url 'orders:add' %}" class="btn btn-success btn-lg btn-block" type="button">Checkout</a>
+                    <a role="button" href="{% url 'orders:add' %}" class="btn btn-success btn-lg btn-block"
+                        type="button">Checkout</a>
                 </div>
             </div>
             <div class="col-md-7 col-lg-8 p-3">
@@ -43,8 +44,12 @@
                 <div class="card mb-3 border-0 product-item" data-index="{{product.id}}">
                     <div class="row g-0">
                         <div class="col-md-2 d-none d-md-block">
-                            <img class="img-fluid mx-auto d-block" alt="Responsive image"
-                                src="{{ product.image.url }}" />
+                            {% for product_image in product.product_image.all %}
+                            {% if product_image.is_feature %}
+                            <img class="img-fluid" alt="Responsive image" src="{{ product_image.image.url }}"
+                                alt="{{ product_image.image.alt_text }}">
+                            {% endif %}
+                            {% endfor %}
                         </div>
                         <div class="col-md-10 ps-md-3">
                             <div class="card-body p-1">

@@ -51,7 +51,7 @@
                 <tr>
                   <td>{{ forloop.counter }}</td>
                   <td><a href="{{ item.product.get_absolute_url }}">{{ item.product.title }}</a></td>
-                  <td>{{ item.product.price }} UC</td>
+                  <td>{{ item.product.regular_price }} UC</td>
                   <td>{{ order.created }}</td>
                 </tr>
               {% endfor %}
