@@ -30,7 +30,7 @@ class MyUser(AbstractUser):
     email = models.EmailField("email address", unique=True)
     username = models.CharField(max_length=150, unique=True)
     ethereum_account = models.CharField(max_length=512, blank=False)
-    first_name = models.CharField(max_length=150, blank=True)
+    name = models.CharField(max_length=150, blank=False)
     is_staff = models.BooleanField(default=False)
 
     objects = CustomAccountManager()

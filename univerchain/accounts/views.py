@@ -51,30 +51,43 @@ def activate(request, uidb64, token):
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = MyUser.objects.get(pk=uid)
     except BaseException:
-        pass
+        return render(request, "accounts/registration/invalid.html")
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
         auth.login(request, user)
-        return redirect("accounts:dashboard")
+        return redirect("accounts:orders")
     else:
         return render(request, "accounts/registration/invalid.html")
 
 
 @login_required
-def dashboard(request):
+def account(request):
+    return render(request, "accounts/user/account.html")
+
+
+@login_required
+def univercoin(request):
     account = request.user.ethereum_account
     contract = ethereum.Contract
-    orders = user_orders(request)
     ether_state = True if contract else False
     coin = 0
 
     if ether_state:
         coin = contract.functions.balanceOf(account).call({"from": account})
 
-    context = {"coin": coin, "orders": orders}
+    context = {"coin": coin}
 
-    return render(request, "accounts/user/dashboard.html", context)
+    return render(request, "accounts/user/univercoin.html", context)
+
+
+@login_required
+def orders(request):
+    orders = user_orders(request)
+
+    context = {"orders": orders}
+
+    return render(request, "accounts/user/orders.html", context)
 
 
 @login_required

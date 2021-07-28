@@ -13,7 +13,9 @@ urlpatterns = [
     ),
     path("logout/", auth_views.LogoutView.as_view(next_page="/accounts/login/"), name="logout"),
     path("register/", views.register, name="register"),
-    path("dashboard/", views.dashboard, name="dashboard"),
+    path("account/", views.account, name="account"),
+    path("univercoin/", views.univercoin, name="univercoin"),
+    path("orders/", views.orders, name="orders"),
     path("activate/<slug:uidb64>/<slug:token>/", views.activate, name="activate"),
     path(
         "password_reset/",

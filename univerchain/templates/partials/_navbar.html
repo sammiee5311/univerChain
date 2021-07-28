@@ -32,8 +32,8 @@
       <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
         <li>
-          <a class="nav-link" href="{% url 'accounts:dashboard' %}">
-            Welcome, {{ user.username }} (Dashboard) </a>
+          <a class="nav-link" href="{% url 'accounts:account' %}">
+            Welcome, {{ user.username }} </a>
         </li>
         <li>
           <a id="cart-qty" class="nav-link" href="{% url 'cart:cart_summary' %}">

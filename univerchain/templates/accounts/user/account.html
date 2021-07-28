@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %} | ether {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-3">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="display-4">Account</h1>
+      <p class="lead text-muted p-2">Manage your personal info.</p>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+    <div class="col-md-12">
+        <h2>Welcome {{ user.username }}</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+        <a href="{% url 'accounts:orders' %}" class="text-reset text-decoration-none" role="button" style="max-width: 540px;">
+        <div class="card mb-3">
+            <div class="row">
+            <div class="col-2 position-relative">
+            </div>
+            <div class="col-10">
+                <div class="card-body md-1">
+                <h1 class="h5">Orders</h1>
+                <p class="card-text small text-muted">Manage your orders.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        </a>
+        </div>
+        <div class="col-sm">
+        <a href="{% url 'accounts:edit_info' %}" class="text-reset text-decoration-none" role="button" style="max-width: 540px;">
+        <div class="card mb-3">
+            <div class="row">
+            <div class="col-2 position-relative">
+            </div>
+            <div class="col-10">
+                <div class="card-body md-1">
+                <h1 class="h5">Edit</h1>
+                <p class="card-text small text-muted">Edit your personal info</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        </a>
+        </div>
+        <div class="col-sm">
+        <a href="{% url 'accounts:univercoin' %}" class="text-reset text-decoration-none" role="button" style="max-width: 540px;">
+        <div class="card mb-3">
+            <div class="row">
+            <div class="col-2 position-relative">
+            </div>
+            <div class="col-10">
+                <div class="card-body md-1">
+                <h1 class="h5">Univercoin</h1>
+                <p class="card-text small text-muted">Check your coin.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        </a>
+        </div>
+    </div>
+    
+  </div>
+
+{% endblock %}

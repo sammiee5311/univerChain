@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} | ether {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-3">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="display-4">Univercoin</h1>
+      <p class="lead text-muted p-2">Check your personal coin info.</p>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Welcome <a href="{% url 'accounts:account' %}">{{ user.username }}</a> <a style="float:right;"> coins : {{ coin }}</a></h2>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

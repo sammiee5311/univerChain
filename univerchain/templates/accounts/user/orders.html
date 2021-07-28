@@ -9,32 +9,17 @@
 <section class="py-5 text-center container">
   <div class="row py-lg-3">
     <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="display-4">Dashboard</h1>
+      <h1 class="display-4">Orders</h1>
       <p class="lead text-muted p-2">Check usage of coins.</p>
     </div>
   </div>
-    <div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="{% url 'pages:home' %}">Home</a>
-        </li>
-        <li class="breadcrumb-item active"> Dashboard</li>
-        <ul class="navbar-nav ml-auto">
-          <li>
-            <a href="{% url 'accounts:edit_info' %}"> Change Info</a>
-          </li>
-        </ul>
-      </ol>
-    </nav>
-  </div>
 </section>
 
-<section id="dashboard" class="py-2">
+<section id="orders" class="py-2">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h2>Welcome {{ user.username }} <a style="float:right;"> coins : {{ coin }}</a></h2>
+        <h2>Welcome <a href="{% url 'accounts:account' %}">{{ user.username }}</a></h2>
         <p>Here is the order history that you've bought.</p>
         <table class="table">
           <thead>
