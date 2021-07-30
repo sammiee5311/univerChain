@@ -5,8 +5,8 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from ether.ethereum import Ethereum
-from orders.views import user_orders
+from univerchain.apps.univercoin.ethereum import Ethereum
+from univerchain.apps.orders.views import user_orders
 
 from .forms import EditForm, RegistrationForm
 from .models import MyUser
@@ -84,7 +84,6 @@ def univercoin(request):
 @login_required
 def orders(request):
     orders = user_orders(request)
-
     context = {"orders": orders}
 
     return render(request, "accounts/user/orders.html", context)

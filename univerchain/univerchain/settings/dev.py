@@ -1,6 +1,6 @@
 import mimetypes
 
-from .base import *
+from .production import *
 
 if DEBUG:
     INTERNAL_IPS = [

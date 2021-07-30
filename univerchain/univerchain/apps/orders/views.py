@@ -1,7 +1,7 @@
-from cart.cart import Cart
+from univerchain.apps.cart.cart import Cart
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from ether.ethereum import Ethereum
+from univerchain.apps.univercoin.ethereum import Ethereum
 
 from .models import Order, OrderItem
 

@@ -6,14 +6,14 @@ from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("pages.urls", namespace="pages")),
-    path("univercoin/", include("ether.urls", namespace="univercoin")),
-    path("accounts/", include("accounts.urls", namespace="accounts")),
-    path("store/", include("store.urls", namespace="store")),
-    path("cart/", include("cart.urls", namespace="cart")),
-    path("orders/", include("orders.urls", namespace="orders")),
-    path("attendance/", include("attendance.urls", namespace="attendance")),
-    path("__debug__/", include(debug_toolbar.urls)),
+    path("", include("univerchain.apps.pages.urls", namespace="pages")),
+    path("univercoin/", include("univerchain.apps.univercoin.urls", namespace="univercoin")),
+    path("accounts/", include("univerchain.apps.accounts.urls", namespace="accounts")),
+    path("store/", include("univerchain.apps.store.urls", namespace="store")),
+    path("cart/", include("univerchain.apps.cart.urls", namespace="cart")),
+    path("orders/", include("univerchain.apps.orders.urls", namespace="orders")),
+    path("attendance/", include("univerchain.apps.attendance.urls", namespace="attendance")),
+    # path("__debug__/", include(debug_toolbar.urls)),
 ]
 
 if settings.DEBUG:

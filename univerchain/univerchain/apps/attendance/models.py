@@ -1,4 +1,4 @@
-from accounts.models import MyUser
+from univerchain.apps.accounts.models import MyUser
 from django.db import models
 
 
