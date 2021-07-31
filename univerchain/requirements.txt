@@ -8,3 +8,4 @@ psycopgy2
 uwsgi
 djangoresframework
 django-debug-toolbar
+pytest-django

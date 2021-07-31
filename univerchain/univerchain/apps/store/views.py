@@ -4,8 +4,7 @@ from .models import Category, Product
 
 
 def category_list(request, category_slug=None):
-    category_name = category_slug.replace("-", " ").capitalize()
-    print(category_name)
+    category_name = category_slug.replace("-", " ")
     category = get_object_or_404(Category, slug=category_slug)
     products = Product.objects.filter(
         category__in=Category.objects.get(name=category_name).get_descendants(include_self=True), is_active=True

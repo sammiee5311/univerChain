@@ -13,7 +13,7 @@ urlpatterns = [
     path("cart/", include("univerchain.apps.cart.urls", namespace="cart")),
     path("orders/", include("univerchain.apps.orders.urls", namespace="orders")),
     path("attendance/", include("univerchain.apps.attendance.urls", namespace="attendance")),
-    # path("__debug__/", include(debug_toolbar.urls)),
+    path("__debug__/", include(debug_toolbar.urls)),
 ]
 
 if settings.DEBUG:
