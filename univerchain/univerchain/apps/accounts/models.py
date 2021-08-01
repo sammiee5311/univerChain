@@ -1,26 +1,45 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db import models
 
 
 class CustomAccountManager(BaseUserManager):
+    def validate_email(self, email):
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise ValueError("You must type a valid email address")
+
     def create_superuser(self, email, username, password, **other_fields):
         other_fields.setdefault("is_staff", True)
         other_fields.setdefault("is_superuser", True)
-        ethereum_account = "superuser"
+        other_fields.setdefault("is_active", True)
+
+        if "ethereum_account" not in other_fields:
+            other_fields.setdefault("ethereum_account", "superuser")
+
+        if email:
+            email = self.normalize_email(email)
+            self.validate_email(email)
+        else:
+            raise ValueError("You must type an email address")
 
         if other_fields.get("is_staff") is not True:
             raise ValueError("Wrong Value : is_staff=False")
         if other_fields.get("is_superuser") is not True:
             raise ValueError("Wrong Value : is_superuser=False")
 
-        return self.create_user(email, username, password, ethereum_account, **other_fields)
+        return self.create_user(email, username, password, **other_fields)
 
-    def create_user(self, email, username, password, ethereum_account, **other_fields):
-        if not email:
+    def create_user(self, email, username, password, **other_fields):
+        if email:
+            email = self.normalize_email(email)
+            self.validate_email(email)
+        else:
             raise ValueError("You must type an email address")
 
-        email = self.normalize_email(email)
-        user = self.model(email=email, username=username, ethereum_account=ethereum_account, **other_fields)
+        user = self.model(email=email, username=username, **other_fields)
         user.set_password(password)
         user.save()
         return user

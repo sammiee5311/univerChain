@@ -1,12 +1,13 @@
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from univerchain.apps.univercoin.ethereum import Ethereum
 from univerchain.apps.orders.views import user_orders
+from univerchain.apps.univercoin.ethereum import Ethereum
 
 from .forms import EditForm, RegistrationForm
 from .models import MyUser
@@ -16,6 +17,8 @@ ethereum = Ethereum()
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect("accounts:account")
     if request.method == "POST":
         regitseration_form = RegistrationForm(request.POST)
 
@@ -40,6 +43,8 @@ def register(request):
             )
             user.email_user(subject=subject, message=message)
             return redirect("pages:home")
+        else:
+            return HttpResponse("Error", status=400)
     else:
         regitseration_form = RegistrationForm()
 

@@ -1,5 +1,6 @@
 import factory
 from faker import Faker
+from univerchain.apps.accounts.models import MyUser
 from univerchain.apps.store.models import (
     Category,
     Product,
@@ -9,6 +10,8 @@ from univerchain.apps.store.models import (
 )
 
 fake = Faker()
+
+# Store
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):
@@ -55,3 +58,26 @@ class ProductSpecificationValueFactory(factory.django.DjangoModelFactory):
     product = factory.SubFactory(ProductFactory)
     specification = factory.SubFactory(ProductSpecificationFactory)
     value = "programming"
+
+
+# Accounts
+
+
+class MyUserFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = MyUser
+
+    email = "test@test.com"
+    username = "test"
+    name = "test"
+    password = "test"
+    is_active = True
+    is_staff = False
+
+    @classmethod
+    def _create(cls, model_class, *args, **kwargs):
+        manager = cls._get_manager(model_class)
+        if "is_superuser" in kwargs:
+            return manager.create_superuser(*args, **kwargs)
+        else:
+            return manager.create_user(*args, **kwargs)
