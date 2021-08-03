@@ -1,6 +1,6 @@
-from univerchain.apps.cart.cart import Cart
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from univerchain.apps.cart.cart import Cart
 from univerchain.apps.univercoin.ethereum import Ethereum
 
 from .models import Order, OrderItem
@@ -17,7 +17,7 @@ def add(request):
     user_id = request.user.id
     user_ethereum_account = request.user.ethereum_account
     total_price = cart.get_total_price()
-    order_key = "10ckco3ozxjweiow3b32il4lk"
+    order_key = request.POST.get("order_key")
     current_coin = 100
 
     if ether_state:

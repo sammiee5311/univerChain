@@ -90,14 +90,66 @@ def test_user_registration_render(client):
 # Order
 
 
+def test_user_orders_render(client, my_user):
+    user = my_user
+    client.force_login(user)
+    response = client.get(reverse("accounts:orders"))
+    assert response.status_code == 200
+
+
+# Password Reset
+@pytest.mark.parametrize(
+    "email, valid",
+    [
+        ("test@test.com", 302),
+    ],
+)
+@pytest.mark.django_db
+def test_user_password_reset(client, my_user, email, valid):
+    response = client.post(reverse("accounts:password_reset"), {"email": email})
+
+    uid = response.context["uid"]
+    token = response.context["token"]
+    response_email = client.post(reverse("accounts:password_reset_confirm", args=[uid, token]))
+    assert response_email.status_code == valid
+
+
 # Edit
+
+
+def test_user_edit(client, my_user):
+    user = my_user
+    client.force_login(user)
+    response = client.post(reverse("accounts:edit_info"), {"name": "test2", "email": "test@test.com"})
+    assert response.context["edit_form"]["email"].value() == "test@test.com"
+    assert response.status_code == 200
 
 
 # Delete
 
 
-def test_user_registration_authenticated(client, my_user):
+def test_user_delete(client, my_user):
     user = my_user
     client.force_login(user)
     response = client.get(reverse("accounts:delete"))
     assert response.status_code == 302
+
+
+# Account page
+
+
+def test_user_account_render(client, my_user):
+    user = my_user
+    client.force_login(user)
+    response = client.get(reverse("accounts:account"))
+    assert response.status_code == 200
+
+
+# Univercoin
+
+
+def test_user_univercoin_render(client, my_user):
+    user = my_user
+    client.force_login(user)
+    response = client.get(reverse("accounts:univercoin"))
+    assert response.status_code == 200

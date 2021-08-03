@@ -102,7 +102,7 @@ def edit_info(request):
         if edit_form.is_valid():
             edit_form.save()
 
-    else:
+    if edit_form is None:
         edit_form = EditForm(instance=request.user)
 
     return render(request, "accounts/user/edit_info.html", {"edit_form": edit_form})
