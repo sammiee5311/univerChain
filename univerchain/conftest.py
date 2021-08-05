@@ -2,12 +2,16 @@ import pytest
 from pytest_factoryboy import register
 
 from tests.factories import (
+    AttendanceFactory,
     CategoryFactory,
     MyUserFactory,
+    OrderItemFactory,
+    OrdersFactory,
     ProductFactory,
     ProductSpecificationFactory,
     ProductSpecificationValueFactory,
     ProductTypeFactory,
+    UniversityClassFactory,
 )
 
 register(CategoryFactory)
@@ -16,6 +20,10 @@ register(ProductSpecificationFactory)
 register(ProductFactory)
 register(ProductSpecificationValueFactory)
 register(MyUserFactory)
+register(OrdersFactory)
+register(OrderItemFactory)
+register(UniversityClassFactory)
+register(AttendanceFactory)
 
 
 @pytest.fixture
@@ -56,5 +64,29 @@ def my_user(db, my_user_factory):
 
 @pytest.fixture
 def admin_user(db, my_user_factory):
-    my_user = my_user_factory.create(username="admin", is_staff=True, is_superuser=True)
+    my_user = my_user_factory.create(username="admin", email="admin@admin.com", is_staff=True, is_superuser=True)
     return my_user
+
+
+@pytest.fixture
+def order(db, orders_factory):
+    orders = orders_factory.create()
+    return orders
+
+
+@pytest.fixture
+def order_item(db, order_item_factory):
+    order_item = order_item_factory.create()
+    return order_item
+
+
+@pytest.fixture
+def university_class(db, university_class_factory):
+    university_class = university_class_factory.create()
+    return university_class
+
+
+@pytest.fixture
+def attendance(db, attendance_factory):
+    attendance = attendance_factory.create()
+    return attendance

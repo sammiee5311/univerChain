@@ -25,9 +25,9 @@ class RegistrationForm(forms.ModelForm):
         )
 
     def clean_username(self):
-        cleaned_name = self.cleaned_data["username"].lower()
-        duplication = MyUser.objects.filter(username=cleaned_name)
+        cleaned_name = self.cleaned_data["username"]
 
+        duplication = MyUser.objects.filter(username=cleaned_name)
         if duplication.count():
             raise forms.ValidationError("Username already exists")
 

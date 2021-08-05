@@ -1,4 +1,5 @@
 import pytest
+from django.forms import ValidationError
 from django.urls import reverse
 from univerchain.apps.accounts.forms import RegistrationForm
 

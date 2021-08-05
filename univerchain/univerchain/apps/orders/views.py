@@ -18,7 +18,7 @@ def add(request):
     user_ethereum_account = request.user.ethereum_account
     total_price = cart.get_total_price()
     order_key = request.POST.get("order_key")
-    current_coin = 100
+    current_coin = 0
 
     if ether_state:
         current_coin = contract.functions.balanceOf(user_ethereum_account).call({"from": user_ethereum_account})
